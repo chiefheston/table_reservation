@@ -19,7 +19,7 @@ async def get_overlapping_reservations(
         delta = timedelta(minutes=rsr.duration_minutes)  # Time delta
         rsr_et = rsr_st + delta  # Reservation end time
         rsr.reservation_time_end = (
-            rsr_et  # Reservation end time, extra field for check collision
+            rsr_et  # Reservation end time, extra field for check overlapping
         )
         if not (
             (st < rsr_st > et)

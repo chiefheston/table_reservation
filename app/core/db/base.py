@@ -15,7 +15,7 @@ class Base(DeclarativeBase):
 
     @declared_attr.directive
     def __tablename__(cls):
-        return f"{caseconverter.snakecase(cls.__name__)}"
+        return str(caseconverter.snakecase(cls.__name__))
 
     id: Mapped[int] = mapped_column(
         primary_key=True,

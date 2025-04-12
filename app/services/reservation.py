@@ -29,7 +29,9 @@ async def get_overlapping_reservations(
         ):
             overlapping_reservations_list.append(
                 RESERVATION_BUSY.format(
-                    rsr.customer_name, rsr.reservation_time, rsr.reservation_time_end
+                    rsr.customer_name,
+                    rsr.reservation_time,
+                    rsr.reservation_time_end,
                 )
             )
 

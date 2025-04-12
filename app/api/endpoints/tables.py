@@ -1,13 +1,13 @@
 from http import HTTPStatus
 
-from app.validators import table_validator
 from app.core.db import db_helper
 from app.crud.table import table_crud
 from app.schemas.table import (
     TableCreate,
-    TableRead,
     TableDelete,
+    TableRead,
 )
+from app.validators import reservation_validator, table_validator
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -52,6 +52,10 @@ async def delete_table(
     table = await table_validator.object_exists(
         table_id,
         session,
+    )
+    await reservation_validator.check_reservations_by_table(
+        table_id=table_id,
+        session=session,
     )
     return await table_crud.remove(
         table,

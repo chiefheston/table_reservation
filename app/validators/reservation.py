@@ -1,24 +1,25 @@
 from datetime import datetime, timedelta
 from http import HTTPStatus
 
-from app.validators.base import BaseValidator
+from fastapi import HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.crud import reservation_crud
 from app.models import Reservation
 from app.services.constants import (
     ERR_DATETIME_FORMAT,
+    ERR_RESERVATION_EXIST,
     ERR_RESERVATION_OVERLAPPING,
 )
 from app.services.reservation import get_overlapping_reservations
-
-from fastapi import HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
+from app.validators.base import BaseValidator
 
 
 class ReservationValidator(BaseValidator):
     async def check_datetime(self, datetime: datetime) -> None:
         if datetime.tzinfo is not None:
             raise HTTPException(
-                HTTPStatus.UNPROCESSABLE_ENTITY,
+                status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
                 detail=ERR_DATETIME_FORMAT,
             )
 
@@ -44,10 +45,25 @@ class ReservationValidator(BaseValidator):
 
         if overlapping_reservations:
             raise HTTPException(
-                HTTPStatus.UNPROCESSABLE_ENTITY,
+                status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
                 detail=ERR_RESERVATION_OVERLAPPING.format(
                     overlapping_reservations,
                 ),
+            )
+
+    async def check_reservations_by_table(
+        self,
+        table_id: int,
+        session: AsyncSession,
+    ) -> None:
+        reservation_list = await reservation_crud.get_all_by_table_id(
+            table_id=table_id,
+            session=session,
+        )
+        if reservation_list:
+            raise HTTPException(
+                HTTPStatus.UNPROCESSABLE_ENTITY,
+                detail=ERR_RESERVATION_EXIST,
             )
 
 

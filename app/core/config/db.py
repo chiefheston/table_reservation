@@ -3,7 +3,7 @@ from pydantic import BaseModel, PostgresDsn
 
 class DBConfig(BaseModel):
     db_url: PostgresDsn
-    db_echo: bool = True
+    db_echo: bool = False
     db_naming_convention: dict[str, str] = {
         "ix": "ix_%(column_0_label)s",
         "uq": "uq_%(table_name)s_%(column_0_name)s",

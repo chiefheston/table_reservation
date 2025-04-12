@@ -6,7 +6,7 @@ API-сервис бронирования столиков в ресторане
 
 ---
 
-### Стек
+## Стек
 
 - **FastAPI** — Основоной фреймворк.
 - **PostgreSQL** — БД.
@@ -27,34 +27,20 @@ API-сервис бронирования столиков в ресторане
    cd table_reservation
    ```
 
-2. Создание .env файла:
-
-   Для корректной работы сервиса, нужно создать `.env` файл в главной директории сервиса `app/` с такими переменными:
-
-   ```env
-   DB_URL=postgresql+asyncpg://dev:dev@localhost:5433/tablereservation
-   ```
-
-3. Сборка и запуск контейнеров:
+2. Соберите и запустите контейнеры:
 
    ```bash
    docker-compose up --build
    ```
 
-4. Создание первой миграции:
-
-   ```bash
-   docker-compose exec web alembic revision --autogenerate -m "Название миграции"
-   ```
-
-5. Примените миграции:
+3. Примените `Alembic` миграции:
 
    ```bash
    docker-compose exec web alembic upgrade head
    ```
 
-6. Пользуйтесь API
+4. Пользуйтесь API
 
-   Сервис доступен по адресу [http://localhost:8000/docs](http://localhost:8000/docs).
+   Сервис доступен по адресу [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---

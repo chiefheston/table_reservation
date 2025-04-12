@@ -24,7 +24,7 @@ API-сервис бронирования столиков в ресторане
 
    ```bash
    git clone https://github.com/chiefheston/table_reservation.git
-   cd yourproject
+   cd table_reservation
    ```
 
 2. Создание .env файла:

@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      DB_URL: postgresql+asyncpg://table:reservation@db:5432/tablereservation
+      DB_URL: postgresql+asyncpg://table:reservation@db:5423/tablereservation
     networks:
       - app-network
 

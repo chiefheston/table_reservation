@@ -73,3 +73,5 @@ class BaseValidator:
                     obj_id,
                 ),
             )
+
+        return obj

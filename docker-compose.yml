@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: table
+      POSTGRES_PASSWORD: reservation
+      POSTGRES_DB: tablereservation
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5423:5432"
+    networks:
+      - app-network
+
+  web:
+    build: .
+    container_name: fast_api
+    volumes:
+      - .:/app 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_URL: postgresql+asyncpg://table:reservation@db:5432/tablereservation
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

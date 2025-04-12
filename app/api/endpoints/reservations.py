@@ -5,8 +5,9 @@ from app.api.endpoints.validators import table_validator
 from app.core.db import db_helper
 from app.crud import reservation_crud
 from app.schemas.reservation import (
-    ReservationBase,
     ReservationCreate,
+    ReservationRead,
+    ReservationDelete,
 )
 
 from fastapi import APIRouter, Depends
@@ -20,7 +21,8 @@ router = APIRouter(
 
 @router.get(
     "/all",
-    response_model=list[ReservationBase],
+    response_model=list[ReservationRead],
+    status_code=HTTPStatus.OK,
 )
 async def get_all_reservations(
     session: AsyncSession = Depends(db_helper.get_async_session),
@@ -30,7 +32,7 @@ async def get_all_reservations(
 
 @router.post(
     "/",
-    response_model=ReservationBase,
+    response_model=ReservationCreate,
     status_code=HTTPStatus.CREATED,
 )
 async def create_reservation(
@@ -54,7 +56,11 @@ async def create_reservation(
     )
 
 
-@router.delete("/{reservation_id}")
+@router.delete(
+    "/{reservation_id}",
+    response_model=ReservationDelete,
+    status_code=HTTPStatus.OK,
+)
 async def delete_reservation(
     reservation_id: int,
     session: AsyncSession = Depends(db_helper.get_async_session),

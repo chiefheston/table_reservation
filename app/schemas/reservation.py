@@ -25,6 +25,8 @@ class ReservationCreate(ReservationBase):
         from_attributes=True,
     )
 
+class ReservationRead(ReservationBase):
+    id: int
 
 class ReservationDelete(ReservationBase):
     id: int

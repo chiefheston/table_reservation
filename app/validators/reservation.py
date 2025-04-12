@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from http import HTTPStatus
 
-from app.api.endpoints.validators.base import BaseValidator
+from app.validators.base import BaseValidator
 from app.crud import reservation_crud
 from app.models import Reservation
 from app.services.constants import (

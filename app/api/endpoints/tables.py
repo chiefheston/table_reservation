@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from app.api.endpoints.validators import table_validator
+from app.validators import table_validator
 from app.core.db import db_helper
 from app.crud.table import table_crud
 from app.schemas.table import (

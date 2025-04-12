@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
-from app.api.endpoints.validators import reservation_validator
-from app.api.endpoints.validators import table_validator
+from app.validators import reservation_validator
+from app.validators import table_validator
 from app.core.db import db_helper
 from app.crud import reservation_crud
 from app.schemas.reservation import (

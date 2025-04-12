@@ -4,9 +4,9 @@ from app.api.endpoints.validators import table_validator
 from app.core.db import db_helper
 from app.crud.table import table_crud
 from app.schemas.table import (
-    TableBase,
     TableCreate,
     TableRead,
+    TableDelete,
 )
 
 from fastapi import APIRouter, Depends
@@ -30,7 +30,7 @@ async def get_all_tables(
 
 @router.post(
     "/",
-    response_model=TableBase,
+    response_model=TableCreate,
     status_code=HTTPStatus.CREATED,
 )
 async def create_table(
@@ -41,7 +41,10 @@ async def create_table(
     return await table_crud.create(table, session)
 
 
-@router.delete("/{table_id}")
+@router.delete(
+    "/{table_id}",
+    response_model=TableDelete,
+)
 async def delete_table(
     table_id: int,
     session: AsyncSession = Depends(db_helper.get_async_session),

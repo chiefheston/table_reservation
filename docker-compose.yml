@@ -10,7 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5423:5432"
+      - "5433:5432"
     networks:
       - app-network
 
@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      DB_URL: postgresql+asyncpg://table:reservation@db:5423/tablereservation
+      DB_URL: postgresql+asyncpg://table:reservation@db:5433/tablereservation
     networks:
       - app-network
 

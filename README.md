@@ -30,7 +30,7 @@ API-сервис бронирования столиков в ресторане
 2. Соберите и запустите контейнеры:
 
    ```bash
-   docker-compose up --build
+   docker-compose up --build -d
    ```
 
 3. Примените `Alembic` миграции:

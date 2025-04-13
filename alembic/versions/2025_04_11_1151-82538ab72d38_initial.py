@@ -1,6 +1,4 @@
-"""
-
-initial
+"""initial
 
 Revision ID: 82538ab72d38
 Revises:

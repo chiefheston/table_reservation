@@ -33,7 +33,7 @@ class ReservationValidator(BaseValidator):
         If reservation_list is not none raises exception
 
         Args:
-            reserevation (str): Reservation object
+            reserevation (object): Reservation object
             session (AsyncSession): Session object
 
         Raises:
@@ -75,7 +75,7 @@ class ReservationValidator(BaseValidator):
         If reservation_list is not none raises exception
 
         Args:
-            reserevation (str): Reservation object
+            table_id (int): Table id
             session (AsyncSession): Session object
 
         Raises:

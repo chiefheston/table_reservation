@@ -23,11 +23,25 @@ class ReservationValidator(BaseValidator):
                 detail=ERR_DATETIME_FORMAT,
             )
 
-    async def check_reservation_intersections(
+    async def check_reservation_overlapping(
         self,
         reservation: Reservation,
         session: AsyncSession,
     ) -> None:
+        """Check reservation overlapping
+
+        If reservation_list is not none raises exception
+
+        Args:
+            reserevation (str): Reservation object
+            session (AsyncSession): Session object
+
+        Raises:
+            HTTPException: "RESERVATION OVERLAPPING: {list[Reservation]}"
+
+        Returns:
+            None
+        """
         reservation_list = await reservation_crud.get_all_by_table_id(
             table_id=reservation.table_id,
             session=session,
@@ -56,6 +70,20 @@ class ReservationValidator(BaseValidator):
         table_id: int,
         session: AsyncSession,
     ) -> None:
+        """Checks created table reservations
+
+        If reservation_list is not none raises exception
+
+        Args:
+            reserevation (str): Reservation object
+            session (AsyncSession): Session object
+
+        Raises:
+            HTTPException: "RESERVATION OVERLAPPING: {list[Reservation]}"
+
+        Returns:
+            None
+        """
         reservation_list = await reservation_crud.get_all_by_table_id(
             table_id=table_id,
             session=session,

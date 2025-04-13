@@ -9,6 +9,17 @@ async def get_overlapping_reservations(
     reservation_start_time: datetime,
     reservation_end_time: datetime,
 ) -> list[Reservation]:
+    """Gets a list of created reservations that can be overlapped
+
+    Args:
+        reserevation_list (list[Reservation]): Reservation object
+        reservation_start_time (datetime): Starting time of reservation to create
+        reservation_end_time (datetime): End time of reservation to create
+        session (AsyncSession): Session object
+        
+    Returns:
+        None
+    """
     st = reservation_start_time  # Reservation start time
     et = reservation_end_time
 

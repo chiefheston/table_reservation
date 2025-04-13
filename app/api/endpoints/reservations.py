@@ -45,7 +45,7 @@ async def create_reservation(
     await reservation_validator.check_datetime(
         datetime=reservation.reservation_time,
     )
-    await reservation_validator.check_reservation_intersections(
+    await reservation_validator.check_reservation_overlapping(
         reservation=reservation,
         session=session,
     )

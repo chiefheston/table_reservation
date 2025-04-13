@@ -52,14 +52,14 @@ class BaseValidator:
         """Check existing object with id.
 
         Args:
-        - obj_id (int): Object id.
-        - session (AsyncSession): Session object.
+            obj_id (int): Object id.
+            session (AsyncSession): Session object.
 
         Raises:
-        - HTTPException: Object with id 'obj_id' not found!
+            HTTPException: Object with id 'obj_id' not found!
 
         Returns:
-        - Base: Requested object.
+            Base: Requested object.
         """
         obj = await CRUDBase(self.model).get(
             obj_id,
